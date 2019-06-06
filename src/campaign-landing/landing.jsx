@@ -54,6 +54,18 @@ function CampaignList() {
     setOpen(false);
   };
 
+  const formatDate=(date)=> {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [year, month, day].join('-');
+}
+
   return (
     <Paper className={classes.root}>
       <Table className={classes.table}>
@@ -70,7 +82,7 @@ function CampaignList() {
           {campaignList.map((campaign,index)=> (
             <StyledTableRow key={campaign.id} onClick={()=>{handleOpen(index)}} >
               <StyledTableCell component="th" scope="row">
-                {campaign.date}
+                {formatDate(campaign.date)}
               </StyledTableCell>
               <StyledTableCell align="right"><img className="campaign-img" src={campaign.image} alt={campaign.campaign}/>{campaign.campaign}</StyledTableCell>
               <StyledTableCell align="right">{campaign.view}</StyledTableCell>
